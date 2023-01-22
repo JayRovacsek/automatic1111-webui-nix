@@ -5,9 +5,13 @@ let
     config = { allowUnfree = true; };
   };
   inherit (pkgs) callPackage;
+  inherit (self.outputs) systems;
 in {
-  AUTOMATIC1111-stable-diffusion-webui =
-    callPackage ./AUTOMATIC1111-stable-diffusion-webui { };
+  dependencies = callPackage ./dependencies { inherit self system; };
+  source = callPackage ./source { };
+  webui = callPackage ./webui { };
+
+  # python310Packages = { blendmodes = callPackage ./blendmodes { }; };
 }
 
 # TODO: convert below into packages to get deterministic output locations :)
