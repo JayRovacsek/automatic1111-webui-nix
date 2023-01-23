@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub }:
+{ stdenv, lib, fetchFromGitHub, poetry }:
 
 let
   pname = "webui";
@@ -21,6 +21,8 @@ let
 
   pyproject-toml = builtins.readFile ./pyproject.toml;
 
+  poetry-lock = builtins.readFile ./poetry.lock;
+
 in stdenv.mkDerivation {
   inherit pname version src meta;
 
@@ -36,6 +38,10 @@ in stdenv.mkDerivation {
 
     cat << 'EOT' >> pyproject.toml
     ${pyproject-toml}
+    EOT
+
+    cat << 'EOT' >> poetry.lock
+    ${poetry-lock}
     EOT
 
     popd

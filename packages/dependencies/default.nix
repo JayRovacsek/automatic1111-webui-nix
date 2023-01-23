@@ -34,6 +34,8 @@ in stdenv.mkDerivation {
 
     ${poetry}/bin/poetry init --no-interaction --name stable-diffusion-webui --author AUTOMATIC1111 --python 3.10.9 $DEPS > pyproject.toml
 
+    ${poetry}/bin/poetry lock --check --no-update
+
     popd
   '';
 }

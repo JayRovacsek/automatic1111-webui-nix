@@ -18,9 +18,6 @@ let
 
   buildInputs = with pkgs;
     [
-      poetry
-      nixfmt
-      statix
       git # The program instantly crashes if git is not present, even if everything is already downloaded
       python310
       stdenv.cc.cc.lib
